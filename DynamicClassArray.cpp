@@ -1,4 +1,11 @@
 #include <iostream>
+#include <stdexcept>
+
+class dinamicArrayBoundException : public std::out_of_range
+{
+public:
+    dinamicArrayBoundException(const std::string& msg) : std::out_of_range(msg) {}
+};
 
 class dinamicArray
 {
@@ -43,19 +50,25 @@ public:
         return *this;
     }
 
-    // 3. Оператор [] (Неконстантний - для запису та читання: arr[0] = 5)
+    // [] (Not for writing and reading: arr[0] = 5)
     int& operator[](unsigned int index)
     {
-        return arr[index];
+        if (index >= size)
+        { throw dinamicArrayBoundException("Index out of bounds"); }
+        else
+        { return arr[index]; }
     }
 
-    // 3. Оператор [] (Константний - для читання з const об'єктів)
+    // [] (Constant - for reading from const objects)
     const int& operator[](unsigned int index) const
     {
-        return arr[index];
+        if (index >= size)
+        { throw dinamicArrayBoundException("Index out of bounds"); }
+        else
+        { return arr[index]; }
     }
 
-    // 4. Оператор рівності ==
+    // ==
     bool operator==(const dinamicArray& other) const
     {
         if (size != other.size)
@@ -72,7 +85,7 @@ public:
         return true;
     }
 
-    // 5. Оператор нерівності != (реалізований через ==)
+    // != (realized with ==)
     bool operator!=(const dinamicArray& other) const
     {
         return !(*this == other);
@@ -95,22 +108,28 @@ public:
     {
         return size;
     }
+
+    int getElement(int index, int size) {
+        if (index < 0 || index >= size) {
+            throw dinamicArrayBoundException("Index out of bounds");
+        }
+        return 42; // Умовне значення
+    }
 };
 
 int main()
 {
     dinamicArray arr1(3);
-    arr1[0] = 10; // Використання оператора []
+    arr1[0] = 10;
     arr1[1] = 20;
     arr1[2] = 30;
 
-    // Перевірка копіюючого конструктора
     dinamicArray arr2 = arr1;
 
-    // Перевірка оператора ==
+    
     if (arr1 == arr2)
     {
-        std::cout << "arr1 i arr2 однакові!\n";
+        std::cout << "arr1 and arr2 are equal\n";
     }
 
     // Змінюємо arr2
@@ -119,12 +138,18 @@ int main()
     // Перевірка оператора !=
     if (arr1 != arr2)
     {
-        std::cout << "arr1 i arr2 тепер різні!\n";
+        std::cout << "arr1 and arr2 are not equal\n";
     }
-
-    // Перевірка оператора присвоєння =
+    try {
+        int k = arr1[4]; // This will throw an exception since index 4 is out of bounds
+		std::cout << "Element at index 4: " << k << std::endl;
+    }
+    catch (const dinamicArrayBoundException& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+    // Checking the assignment operator =
     arr1 = arr2;
-    std::cout << "Після arr1 = arr2, arr1[0] дорівнює: " << arr1[0] << std::endl;
-
+    std::cout << "After arr1 = arr2, arr1[0] is: " << arr1[0] << std::endl;
+    
     return 0;
 }
