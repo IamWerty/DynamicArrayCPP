@@ -115,6 +115,12 @@ public:
         }
         return 42; // Умовне значення
     }
+    
+    // bool conversion 
+    explicit operator bool() const
+    {
+        return size > 0;
+    }
 };
 
 int main()
