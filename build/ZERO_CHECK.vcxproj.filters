@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\PC\source\repos\DynamicClassArray\DynamicClassArray\build\CMakeFiles\ec443ae59145692a07fa46b1e8b7355b\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B24E7FE7-01EE-3B61-8391-02D61DE2A11E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

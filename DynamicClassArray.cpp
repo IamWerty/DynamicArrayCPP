@@ -7,16 +7,18 @@ public:
     dinamicArrayBoundException(const std::string& msg) : std::out_of_range(msg) {}
 };
 
+template<typename T>
 class dinamicArray
 {
 private:
-    int* arr;
+    T* arr;
     unsigned int size;
 
 public:
+
     dinamicArray(unsigned int s) : size(s)
     {
-        arr = new int[size](); // init with zeros
+        arr = new T[size](); // init with zeros
     }
     ~dinamicArray()
     {
@@ -125,12 +127,12 @@ public:
 
 int main()
 {
-    dinamicArray arr1(3);
+    dinamicArray<int> arr1(3);
     arr1[0] = 10;
     arr1[1] = 20;
     arr1[2] = 30;
 
-    dinamicArray arr2 = arr1;
+    dinamicArray<int> arr2 = arr1;
 
     
     if (arr1 == arr2)
