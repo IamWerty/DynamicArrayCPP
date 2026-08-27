@@ -7,12 +7,13 @@ public:
     dinamicArrayBoundException(const std::string& msg) : std::out_of_range(msg) {}
 };
 
-template<typename T>
+template<typename T, std::size_t N>
 class dinamicArray
 {
 private:
     T* arr;
     unsigned int size;
+	T array[N]; // Fixed-size array of type T with size N
 
 public:
 
@@ -127,12 +128,12 @@ public:
 
 int main()
 {
-    dinamicArray<int> arr1(3);
+    dinamicArray<int, 3> arr1(3);
     arr1[0] = 10;
     arr1[1] = 20;
     arr1[2] = 30;
 
-    dinamicArray<int> arr2 = arr1;
+    dinamicArray<int, 3> arr2 = arr1;
 
     
     if (arr1 == arr2)
